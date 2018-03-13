@@ -1,0 +1,7 @@
+{
+  "extends": "es2015",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "plugins": ["import"]
+}

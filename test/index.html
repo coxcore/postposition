@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>coxcore-postposition</title>
+</head>
+<body>
+<div>
+    <h2>오류 목록</h2>
+    <ul id="errors"><li>오류가 없습니다.</li></ul>
+</div>
+
+<script src="../dist/cox.postposition.min.js"></script>
+<script>
+    var displayResult = function(errors) {
+        document.getElementById('errors').innerHTML = '<li>' + errors.join('</li>\n<li>') + '</li>';
+    };
+
+    var postposition = cox.postposition;
+</script>
+<script src="test.js"></script>
+</body>
+</html>

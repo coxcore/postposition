@@ -1,0 +1,9 @@
+demo/
+test/
+.idea/
+.babelrc
+.editorconfig
+.eslintrc
+.git*
+package-lock.json
+webpack.config.js
