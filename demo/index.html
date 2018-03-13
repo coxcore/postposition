@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap {
+            padding: 10px;
+        }
+
+        span[contenteditable] {
+            display:inline-block;
+            padding: 5px;
+            min-width: 50px;
+            text-align: center;
+            font-weight: bold;
+            background: #efefef;
+
+        }
+
+        span[contenteditable]+span {
+            display:inline-block;
+            text-align: center;
+            min-width: 35px;
+        }
+    </style>
+</head>
+<body>
+<div id="default-supported" class="wrap">
+    <span contenteditable>A</span><span>는</span>
+    <span contenteditable>B</span><span>가</span>
+    <span contenteditable>C</span><span>와</span>
+    <span contenteditable>D</span><span>를</span>
+    <span contenteditable>E</span><span>나</span>
+    <span contenteditable>F</span><span>로</span>
+    변경합니다.
+</div>
+<hr>
+<div id="search-example" class="wrap">
+    <input type="text">
+    <p id="search-result">단어를 입력해 주세요.</p>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../dist/cox.postposition.min.js"></script>
+<script type="module">
+  $('#default-supported').on('input.span blur.span change.span', '[contenteditable]', event => {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      return false;
+    }
+
+    const $span = $(event.currentTarget);
+    const $postposition = $span.next();
+    const text = $span.text();
+    const type = $.trim($postposition.text());
+    const pp = cox.postposition.pick(text, type); // 단어에 적용할 조사 반환
+
+    $postposition.text(pp);
+  });
+
+  $('#search-example').on('input.span blur.span change.span', 'input:text', event => {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      return false;
+    }
+
+    const $input = $(event.currentTarget);
+    const value = $input.val();
+    let result = '';
+
+    if (value) {
+      const text = cox.postposition.put(`'${$input.val()}'`, '을');
+      result = `${text} 입력했습니다.`;
+    } else {
+      result = '단어를 입력해 주세요.';
+    }
+
+    $('#search-result').text(result);
+  });
+</script>
+</body>
+</html>
