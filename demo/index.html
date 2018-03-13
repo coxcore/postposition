@@ -44,12 +44,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../dist/cox.postposition.min.js"></script>
 <script>
-  $('#default-supported').on('input.span blur.span change.span', '[contenteditable]', function(event) {
-    if (event.keyCode === 13 || event.keyCode === 32) {
-      return false;
-    }
-
-    var $span = $(event.currentTarget);
+  $('#default-supported').on('input.sample blur.sample change.sample', '[contenteditable]', function(event) {var $span = $(event.currentTarget);
     var $postposition = $span.next();
     var text = $span.text();
     var type = $.trim($postposition.text());
@@ -58,11 +53,7 @@
     $postposition.text(pp);
   });
 
-  $('#search-example').on('input.span blur.span change.span', 'input:text', function(event) {
-    if (event.keyCode === 13 || event.keyCode === 32) {
-      return false;
-    }
-
+  $('#search-example').on('input.sample blur.sample change.sample', 'input:text', function(event) {
     var $input = $(event.currentTarget);
     var value = $input.val();
     var result = '';

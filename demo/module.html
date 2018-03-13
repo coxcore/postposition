@@ -45,11 +45,7 @@
 <script type="module">
     import postposition from '../src/postposition.js';
 
-    $('#default-supported').on('input.span blur.span change.span', '[contenteditable]', event => {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-            return false;
-        }
-
+    $('#default-supported').on('input.sample blur.sample change.sample', '[contenteditable]', event => {
         const $span = $(event.currentTarget);
         const $postposition = $span.next();
         const text = $span.text();
@@ -59,11 +55,7 @@
         $postposition.text(pp);
     });
 
-    $('#search-example').on('input.span blur.span change.span', 'input:text', event => {
-      if (event.keyCode === 13 || event.keyCode === 32) {
-        return false;
-      }
-
+    $('#search-example').on('input.sample blur.sample change.sample', 'input:text', event => {
       const $input = $(event.currentTarget);
       const value = $input.val();
       let result = '';
