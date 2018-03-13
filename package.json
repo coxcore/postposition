@@ -1,6 +1,6 @@
 {
   "name": "cox-postposition",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "This library help you to fix korean postpositions.",
   "main": "src/postposition.js",
   "scripts": {
