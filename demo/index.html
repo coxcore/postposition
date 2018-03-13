@@ -43,33 +43,34 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../dist/cox.postposition.min.js"></script>
-<script type="module">
-  $('#default-supported').on('input.span blur.span change.span', '[contenteditable]', event => {
+<script>
+  $('#default-supported').on('input.span blur.span change.span', '[contenteditable]', function(event) {
     if (event.keyCode === 13 || event.keyCode === 32) {
       return false;
     }
 
-    const $span = $(event.currentTarget);
-    const $postposition = $span.next();
-    const text = $span.text();
-    const type = $.trim($postposition.text());
-    const pp = cox.postposition.pick(text, type); // 단어에 적용할 조사 반환
+    var $span = $(event.currentTarget);
+    var $postposition = $span.next();
+    var text = $span.text();
+    var type = $.trim($postposition.text());
+    var pp = cox.postposition.pick(text, type); // 단어에 적용할 조사 반환
 
     $postposition.text(pp);
   });
 
-  $('#search-example').on('input.span blur.span change.span', 'input:text', event => {
+  $('#search-example').on('input.span blur.span change.span', 'input:text', function(event) {
     if (event.keyCode === 13 || event.keyCode === 32) {
       return false;
     }
 
-    const $input = $(event.currentTarget);
-    const value = $input.val();
-    let result = '';
+    var $input = $(event.currentTarget);
+    var value = $input.val();
+    var result = '';
+    var text;
 
     if (value) {
-      const text = cox.postposition.put(`'${$input.val()}'`, '을');
-      result = `${text} 입력했습니다.`;
+      text = cox.postposition.put("'" + $input.val() + "'", '을');
+      result = text + ' 입력했습니다.';
     } else {
       result = '단어를 입력해 주세요.';
     }
