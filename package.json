@@ -4,7 +4,6 @@
   "description": "This library help you to fix korean postpositions.",
   "main": "src/postposition.js",
   "scripts": {
-    "install": "npm run build",
     "test": "node ./test/test.js",
     "build": "./node_modules/.bin/webpack && npm run test"
   },
