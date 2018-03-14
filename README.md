@@ -10,9 +10,14 @@
 ## Installation
 
 ### NPM
+
 ```
 $ npm install cox-postposition
 ```
+
+`npm install`을 통해 설치하는 경우 `ECMA2015` 문법으로 작성된 JS 파일을 참조합니다.
+따라서 `ECMA2015 Moudle`을 지원하지 않는 환경에서는 `UMD` 사용법을 참고하여 사용하시기 바랍니다
+
 
 ### CDN
 ```
@@ -34,11 +39,26 @@ const num = postposition.put('8', '을');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
-console.log(eng); // 8을
+console.log(num); // 8을
 ```
 
 ### UMD
-IE8 이하는 지원하지 않습니다.
+
+`ECMA2015 Module`을 지원하지 않는 환경은 아래와 같이 사용할 수 있습니다.
+
+```js
+const postposition = require('cox-postposition/dist/cox.postposition.min.js');
+
+const kor = postposition.put('고양이', '을');
+const eng = postposition.put('cat', '을');
+const num = postposition.put('8', '을');
+
+console.log(kor); // 고양이를
+console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
+console.log(num); // 8을
+```
+
+HTML 페이지에서 사용하는 방법은 아래와 같습니다. 단, IE8 이하는 지원하지 않습니다.
 
 ```html
 <script src="https://cdn.rawgit.com/coxcore/postposition/0.0.1/dist/cox.postposition.min.js"></script>
@@ -50,12 +70,12 @@ IE8 이하는 지원하지 않습니다.
 
   console.log(kor); // 고양이를
   console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
-  console.log(eng); // 8을
+  console.log(num); // 8을
 </script>
 ```
 
-기본 `put` 메서드 외에 사용법은 아래와 같습니다.
 
+### Details
 
 ```js
 import postposition from 'cox-postposition';
@@ -255,6 +275,36 @@ eun('구름'); // 구름은
 eul('구름'); // 구름을
 ya('구름'); // 구름아
 
+```
+
+## Guide
+
+한글은 종성에 따라 조사가 결정되므로 종성 유무를 파악하여 조사를 구분하도록 처리하고 있습니다. 단, `로/으로`에 한해서 `ㄹ` 종성은 없는 것으로 예외처리합니다.
+
+영문의 경우는 영어 발음을 기준으로 처리합니다. 단, 영문의 경우는 발음을 표기하는 방식에 규칙이 없기 때문에 흔한 상황을 위주로 분류하고 특수한 사례를 개별 관리하고 있습니다.
+
+```
+// me로 끝나는 단어
+me[미] -> me는
+some[썸] - some은
+
+// oot로 끝나는 단어
+root[루트] -> root를
+foot[풋] -> foot을
+```
+
+한글의 영문 표기법에 따른 발음은 고려하지 않습니다.
+
+```
+[Ji-sung Park] park -> park[파크]를, 팍(X)
+[So Ji-sub] sub -> sub[서브]를, 섭(X)
+```
+
+숫자의 경우는 한글 발음을 기준으로 합니다.
+
+```
+동물1 -> 동물1[일]을
+animal3 -> animal3[삼]을, 쓰리(X)
 ```
 
 ## License
