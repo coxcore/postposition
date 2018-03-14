@@ -1,35 +1,33 @@
 # cox.postposition
-> 종성 여부에 따라 글자 뒤에 붙는 한글 조사를 처리하는 javascript library입니다.
->
-> 국어, 숫자, 영어에 대한 한글 조사를 선택하거나 적용합니다. 단, 영어는 발음이 특수한 경우에 대해서 100% 지원하지 않습니다.
+> 한글, 영문, 숫자에 대한 한글 조사를 선택하거나 적용합니다. 단, 영문은 모든 상황에 대해 100% 지원하지 않습니다.
 
-## Demo
+## 예제
 
 [예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.0.0/demo/index.html)
 
-## Installation
+## 설치하기
 
-### NPM
+#### NPM
 
-```
+```html
 $ npm install cox-postposition
 ```
 
-`npm install`을 통해 설치하는 경우 `ECMA2015` 문법으로 작성된 JS 파일을 참조합니다.
-따라서 `ECMA2015 Moudle`을 지원하지 않는 환경에서는 `UMD` 사용법을 참고하여 사용하시기 바랍니다
+`npm install`을 통해 설치하는 경우 `ES6` 문법으로 작성한 원본 JS 파일을 참조합니다.
+따라서 `ES6`를 지원하지 않는 환경에서는 [UMD](#umd) 사용법을 참고하여 사용하시기 바랍니다
 
-
-### CDN
-```
+#### CDN
+```html
 https://cdn.rawgit.com/coxcore/postposition/1.0.0/dist/cox.postposition.min.js
 ```
 
-### DOWNLOAD
-- [Releases](https://github.com/coxcore/postposition/releases)
+#### DOWNLOAD
+- [Github](https://github.com/coxcore/postposition/releases)
 
-## Usage
 
-### Module
+## 사용법
+
+#### ES6
 ```js
 import postposition from 'cox-postposition';
 
@@ -42,9 +40,7 @@ console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
 ```
 
-### UMD
-
-`ECMA2015 Module`을 지원하지 않는 환경은 아래와 같이 사용할 수 있습니다.
+#### UMD - ES6 Module을 지원하지 않는 환경
 
 ```js
 const postposition = require('cox-postposition/dist/cox.postposition.min.js');
@@ -58,7 +54,7 @@ console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
 ```
 
-HTML 페이지에서 사용하는 방법은 아래와 같습니다. 단, IE8 이하는 지원하지 않습니다.
+#### HTML
 
 ```html
 <script src="https://cdn.rawgit.com/coxcore/postposition/1.0.0/dist/cox.postposition.min.js"></script>
@@ -75,7 +71,7 @@ HTML 페이지에서 사용하는 방법은 아래와 같습니다. 단, IE8 이
 ```
 
 
-### Details
+#### Details
 
 ```js
 import postposition from 'cox-postposition';
@@ -166,12 +162,12 @@ postposition.check('feel', '로'); // false
 postposition.check('7', '로'); // false
 ```
 
-### pick( text[, type, special] )
+### pick( text, type[, special] )
 
 > 단어에 맞는 조사를 반환합니다.
 
 * `text`: [필수] 종성을 적용할 단어
-* `type`: [선택] 조사 타입, 종성이 없을 때 조사
+* `type`: [필수] 조사 타입, 종성이 없을 때 조사
 * `special`: [선택] 종성이 있을 때 조사
 * `return`: 적용할 조사
 
@@ -209,12 +205,12 @@ postposition.pick('swimming', '랑', '이랑'); // 이랑
 postposition.pick('1', '면', '이면'); // 이면
 ```
 
-### put( text[, type, special] )
+### put( text, type[, special] )
 
 > 단어에 맞는 조사를 적용한 글자를 반환합니다.
 
 * `text`: [필수] 종성을 적용할 단어
-* `type`: [선택] 조사 타입, 종성이 없을 때 조사
+* `type`: [필수] 조사 타입, 종성이 없을 때 조사
 * `special`: [선택] 종성이 있을 때 조사
 * `return`: 단어에 조사를 적용한 글자
 
@@ -281,28 +277,28 @@ ya('구름'); // 구름아
 
 한글은 종성에 따라 조사가 결정되므로 종성 유무를 파악하여 조사를 구분하도록 처리하고 있습니다. 단, `로/으로`에 한해서 `ㄹ` 종성은 없는 것으로 예외처리합니다.
 
-영문의 경우는 영어 발음을 기준으로 처리합니다. 단, 영문의 경우는 발음을 표기하는 방식에 규칙이 없기 때문에 흔한 상황을 위주로 분류하고 특수한 사례를 개별 관리하고 있습니다.
+영문의 경우는 영어 발음을 기준으로 처리합니다. 단, 영문의 경우는 발음을 표기하는 방식에 규칙이 없기 때문에 흔한 상황 위주로 분류하고 특수한 사례를 개별 관리하고 있습니다.
 
-```
+```html
 // me로 끝나는 단어
-me[미] -> me는
-some[썸] - some은
+me -> me[미]는
+some - some[썸]은
 
 // oot로 끝나는 단어
-root[루트] -> root를
-foot[풋] -> foot을
+root -> root[루트]를
+foot -> foot[풋]을
 ```
 
 한글의 영문 표기법에 따른 발음은 고려하지 않습니다.
 
-```
+```html
 [Ji-sung Park] park -> park[파크]를, 팍(X)
 [So Ji-sub] sub -> sub[서브]를, 섭(X)
 ```
 
 숫자의 경우는 한글 발음을 기준으로 합니다.
 
-```
+```html
 동물1 -> 동물1[일]을
 animal3 -> animal3[삼]을, 쓰리(X)
 ```
