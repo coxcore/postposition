@@ -34,7 +34,7 @@ const num = postposition.put('8', '을');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
-console.log(eng); // 8을
+console.log(num); // 8을
 ```
 
 ### UMD
@@ -50,7 +50,7 @@ IE8 이하는 지원하지 않습니다.
 
   console.log(kor); // 고양이를
   console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
-  console.log(eng); // 8을
+  console.log(num); // 8을
 </script>
 ```
 
