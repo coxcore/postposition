@@ -5,7 +5,7 @@
 
 ## Demo
 
-[예제 보기](https://cdn.rawgit.com/coxcore/postposition/0.0.1/demo/index.html)
+[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.0.0/demo/index.html)
 
 ## Installation
 
@@ -21,7 +21,7 @@ $ npm install cox-postposition
 
 ### CDN
 ```
-https://cdn.rawgit.com/coxcore/postposition/0.0.1/dist/cox.postposition.min.js
+https://cdn.rawgit.com/coxcore/postposition/1.0.0/dist/cox.postposition.min.js
 ```
 
 ### DOWNLOAD
@@ -61,7 +61,7 @@ console.log(num); // 8을
 HTML 페이지에서 사용하는 방법은 아래와 같습니다. 단, IE8 이하는 지원하지 않습니다.
 
 ```html
-<script src="https://cdn.rawgit.com/coxcore/postposition/0.0.1/dist/cox.postposition.min.js"></script>
+<script src="https://cdn.rawgit.com/coxcore/postposition/1.0.0/dist/cox.postposition.min.js"></script>
 
 <script>
   var kor = cox.postposition.put('고양이', '을');
