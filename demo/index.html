@@ -9,7 +9,7 @@
         }
 
         span[contenteditable] {
-            display:inline-block;
+            display: inline-block;
             padding: 5px;
             min-width: 50px;
             text-align: center;
@@ -18,8 +18,8 @@
 
         }
 
-        span[contenteditable]+span {
-            display:inline-block;
+        span[contenteditable] + span {
+            display: inline-block;
             text-align: center;
             min-width: 35px;
         }
@@ -44,30 +44,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../dist/cox.postposition.min.js"></script>
 <script>
-  $('#default-supported').on('keyup.sample', '[contenteditable]', function(event) {var $span = $(event.currentTarget);
-    var $postposition = $span.next();
-    var text = $span.text();
-    var type = $.trim($postposition.text());
-    var pp = cox.postposition.pick(text, type); // 단어에 적용할 조사 반환
+    $('#default-supported').on('keyup.sample', '[contenteditable]', function (event) {
+        var $span = $(event.currentTarget);
+        var $postposition = $span.next();
+        var text = $span.text();
+        var type = $.trim($postposition.text());
+        var pp = cox.postposition.pick(text, type); // 단어에 적용할 조사 반환
 
-    $postposition.text(pp);
-  });
+        $postposition.text(pp);
+    });
 
-  $('#search-example').on('input.sample blur.sample change.sample', 'input:text', function(event) {
-    var $input = $(event.currentTarget);
-    var value = $input.val();
-    var result = '';
-    var text;
+    $('#search-example').on('input.sample blur.sample change.sample', 'input:text', function (event) {
+        var $input = $(event.currentTarget);
+        var value = $input.val();
+        var result = '';
+        var text;
 
-    if (value) {
-      text = cox.postposition.put("'" + $input.val() + "'", '을');
-      result = text + ' 입력했습니다.';
-    } else {
-      result = '단어를 입력해 주세요.';
-    }
+        if (value) {
+            text = cox.postposition.put("'" + $input.val() + "'", '을');
+            result = text + ' 입력했습니다.';
+        } else {
+            result = '단어를 입력해 주세요.';
+        }
 
-    $('#search-result').text(result);
-  });
+        $('#search-result').text(result);
+    });
 </script>
 </body>
 </html>
