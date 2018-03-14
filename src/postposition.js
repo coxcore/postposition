@@ -8,7 +8,7 @@
 /**
  * 한글 시작 유니 코드
  *
- * @pirvate
+ * @private
  * @type {number}
  */
 const KO_START_CODE = 44032;
