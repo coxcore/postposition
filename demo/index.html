@@ -44,7 +44,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../dist/cox.postposition.min.js"></script>
 <script>
-  $('#default-supported').on('input.sample blur.sample change.sample', '[contenteditable]', function(event) {var $span = $(event.currentTarget);
+  $('#default-supported').on('keyup.sample', '[contenteditable]', function(event) {var $span = $(event.currentTarget);
     var $postposition = $span.next();
     var text = $span.text();
     var type = $.trim($postposition.text());
