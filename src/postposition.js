@@ -44,7 +44,7 @@ const REG_TARGET_CHAR = /\b(\S*)$/;
  * @type {RegExp}
  */
 const REG_FIXED_NORMAL = new RegExp(`(?:${[
-    "check|[hm]ook",
+    "check|[hm]ook|limit",
 ].join("|")})$`, "i");
 
 /**
@@ -57,13 +57,13 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
     "[ㄱ-ㅎ]",
     "[013678]",
     "^[lmnr]",
-    "\\S+[lmn]e?",
-    "(?:[aeiom]|\\Slu)b",
-    "(?:[aeiu]|[^o]o)p",
-    "(?:[iu]|[^e][ae]|[^o]o)t",
-    "(?:[iou]|[^e][ae])c?k",
-    "[aeiou](?:c|ng)",
-    "app|foot|go+d|big|bag",
+    "\\S[lmn]e?",
+    "\\S(?:[aeiom]|lu)b",
+    "(?:u|\\S[aei]|[^o]o)p",
+    "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
+    "(?:\\S[iou]|[^e][ae])c?k",
+    "\\S[aeiou](?:c|ng)",
+    "app|foot|go+d|big|bag|private",
 ].join("|")})$`, "i");
 
 /**
