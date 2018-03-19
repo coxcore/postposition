@@ -27,7 +27,15 @@ const KO_FINISH_CODE = 55203;
  * @private
  * @type {RegExp}
  */
-const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣]*/g;
+const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣\s]+|\s+$/g;
+
+/**
+ * 종성을 체크할 글자 정규식
+ *
+ * @private
+ * @type {RegExp}
+ */
+const REG_TARGET_CHAR = /\b(\S*)$/;
 
 /**
  * 종성이 없는 조건 정규식
@@ -154,7 +162,7 @@ const checkCode = (code, type) => {
  * @returns {boolean}
  */
 export const check = (text, type) => {
-    const target = text.replace(REG_INVALID_CHAR, '');
+    const target = text.replace(REG_INVALID_CHAR, '').replace(REG_TARGET_CHAR, '$1');
     const code = target.charAt(target.length - 1).charCodeAt();
     const korean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
 
