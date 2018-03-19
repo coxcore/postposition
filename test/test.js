@@ -11,6 +11,7 @@
         "sub/hub/stub/curb",
         "pad/period/wood/hod/hood/mad/could/world",
         "help/stamp/dump/loop/hoop",
+        "hit/suit/wait/limit/quit/quiet/diet",
         "great/meet/street/root/beat/seat",
         "break/seek/check/hook/mook/break/talk",
         "gag/pig/mug/dog",
@@ -28,7 +29,8 @@
         "cab/lib/lab/tomb/bomb/climb/thumb/club/noob/grab/job",
         "god/good",
         "tap/cheap/snap/step/keep/sleep/ship/trip/group/soup/cup/drop",
-        "cat/fat/let/hot/hit/put/cut/foot",
+        "it/commit/submit/fit/habit/private",
+        "cat/fat/let/hot/put/cut/foot",
         "on/run/one/main/learn/turn/jane/done",
         "dream/name/come/room/team/term",
         "kick/pack/rick/book/cook/tack/lock",
@@ -44,7 +46,7 @@
         "ㄹ",
         "1/7/8",
         "L/R",
-        "cool/total/literal/call/locale/drill",
+        "all/cool/total/literal/call/locale/drill",
         "{랄}/(cool)/[7]/'call'"
     ].join("/");
 
