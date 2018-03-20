@@ -27,7 +27,15 @@ const KO_FINISH_CODE = 55203;
  * @private
  * @type {RegExp}
  */
-const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣]*/g;
+const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣\s]+|\s+$/g;
+
+/**
+ * 종성을 체크할 글자 정규식
+ *
+ * @private
+ * @type {RegExp}
+ */
+const REG_TARGET_CHAR = /\b(\S*)$/;
 
 /**
  * 종성이 없는 조건 정규식
@@ -35,8 +43,8 @@ const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣]*/g;
  * @private
  * @type {RegExp}
  */
-const REG_FIXED_NORMAL = new RegExp(`(?:${[
-    "check|[hm]ook",
+const REG_NORMAL_FIXED = new RegExp(`(?:${[
+    "check|[hm]ook|limit",
 ].join("|")})$`, "i");
 
 /**
@@ -49,13 +57,13 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
     "[ㄱ-ㅎ]",
     "[013678]",
     "^[lmnr]",
-    "\\S+[lmn]e?",
-    "(?:[aeiom]|\\Slu)b",
-    "(?:[aeiu]|[^o]o)p",
-    "(?:[iu]|[^e][ae]|[^o]o)t",
-    "(?:[iou]|[^e][ae])c?k",
-    "[aeiou](?:c|ng)",
-    "app|foot|go+d|big|bag",
+    "\\S[lmn]e?",
+    "\\S(?:[aeiom]|lu)b",
+    "(?:u|\\S[aei]|[^o]o)p",
+    "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
+    "(?:\\S[iou]|[^e][ae])c?k",
+    "\\S[aeiou](?:c|ng)",
+    "app|foot|go+d|big|bag|private",
 ].join("|")})$`, "i");
 
 /**
@@ -123,7 +131,7 @@ const checkRo = (type, state) => (type !== "로" && type !== "으로") || !state
  */
 const checkText = (text, type) =>
     // 지정한 종성이 없는 글자가 아닌 경우
-    !REG_FIXED_NORMAL.test(text) &&
+    !REG_NORMAL_FIXED.test(text) &&
     // 종성이 있을 때
     REG_SPECIAL_CHAR.test(text) &&
     // 조사가 '로'인 경우 구분
@@ -140,7 +148,7 @@ const checkText = (text, type) =>
 const checkCode = (code, type) => {
     const finalConsonantCode = (code - KO_START_CODE) % 28;
 
-    // 조사가 '로'면 종성이 리을이 아닐 때
+    // 종성이 있는 경우를 체크하고, 조사 '로'일 때 종성이 'ㄹ'인지 여부 추가 체크
     return finalConsonantCode !== 0 && checkRo(type, finalConsonantCode === 8);
 };
 
@@ -154,11 +162,11 @@ const checkCode = (code, type) => {
  * @returns {boolean}
  */
 export const check = (text, type) => {
-    const target = text.replace(REG_INVALID_CHAR, '');
+    const target = text.replace(REG_INVALID_CHAR, '').replace(REG_TARGET_CHAR, '$1');
     const code = target.charAt(target.length - 1).charCodeAt();
     const korean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
 
-    // 한글이면 종성이 있는 코드인지를 체크
+    // 한글이면 유니코드를 분석하고, 그 외에는 정규식 체크
     return korean ? checkCode(code, type) : checkText(target, type);
 };
 
