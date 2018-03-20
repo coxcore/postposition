@@ -148,7 +148,7 @@ const checkText = (text, type) =>
 const checkCode = (code, type) => {
     const finalConsonantCode = (code - KO_START_CODE) % 28;
 
-    // 조사가 '로'면 종성이 리을이 아닐 때
+    // 종성이 있는 경우를 체크하고, 조사 '로'일 때 종성이 'ㄹ'인지 여부 추가 체크
     return finalConsonantCode !== 0 && checkRo(type, finalConsonantCode === 8);
 };
 
@@ -166,7 +166,7 @@ export const check = (text, type) => {
     const code = target.charAt(target.length - 1).charCodeAt();
     const korean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
 
-    // 한글이면 종성이 있는 코드인지를 체크
+    // 한글이면 유니코드를 분석하고, 그 외에는 정규식 체크
     return korean ? checkCode(code, type) : checkText(target, type);
 };
 
