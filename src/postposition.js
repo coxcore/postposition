@@ -43,7 +43,7 @@ const REG_TARGET_CHAR = /\b(\S*)$/;
  * @private
  * @type {RegExp}
  */
-const REG_FIXED_NORMAL = new RegExp(`(?:${[
+const REG_NORMAL_FIXED = new RegExp(`(?:${[
     "check|[hm]ook|limit",
 ].join("|")})$`, "i");
 
@@ -131,7 +131,7 @@ const checkRo = (type, state) => (type !== "로" && type !== "으로") || !state
  */
 const checkText = (text, type) =>
     // 지정한 종성이 없는 글자가 아닌 경우
-    !REG_FIXED_NORMAL.test(text) &&
+    !REG_NORMAL_FIXED.test(text) &&
     // 종성이 있을 때
     REG_SPECIAL_CHAR.test(text) &&
     // 조사가 '로'인 경우 구분
