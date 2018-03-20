@@ -27,7 +27,7 @@ const KO_FINISH_CODE = 55203;
  * @private
  * @type {RegExp}
  */
-const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣\s]+|\s+$/g;
+const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣\s]+/g;
 
 /**
  * 종성을 체크할 글자 정규식
@@ -35,7 +35,7 @@ const REG_INVALID_CHAR = /[^a-zA-Z0-9ㄱ-ㅎ가-힣\s]+|\s+$/g;
  * @private
  * @type {RegExp}
  */
-const REG_TARGET_CHAR = /\b(\S*)$/;
+const REG_TARGET_CHAR = /^[\s\S]*?(\S*)\s*$/;
 
 /**
  * 종성이 없는 조건 정규식
