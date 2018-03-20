@@ -17,6 +17,7 @@
         "gag/pig/mug/dog",
         "sync/disc",
         "later/tumblr",
+        "g.i.t/.ip",
         "{가}/(le)/[2]/'loop'"
     ].join("/");
 
