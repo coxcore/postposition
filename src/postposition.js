@@ -162,7 +162,7 @@ const checkCode = (code, type) => {
  * @returns {boolean}
  */
 export const check = (text, type) => {
-    const target = text.replace(REG_INVALID_CHAR, '').replace(REG_TARGET_CHAR, '$1');
+    const target = text.replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
     const code = target.charAt(target.length - 1).charCodeAt();
     const korean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
 
