@@ -54,10 +54,10 @@ const REG_NORMAL_FIXED = new RegExp(`(?:${[
  * @type {RegExp}
  */
 const REG_SPECIAL_CHAR = new RegExp(`(?:${[
-    "[ㄱ-ㅎ]",
-    "[013678]",
-    "^[lmnr]",
-    "\\S[lmn]e?",
+    "[ㄱ-ㄷㅁ-ㅎ]",
+    "[036]",
+    "^[mn]",
+    "\\S[mn]e?",
     "\\S(?:[aeiom]|lu)b",
     "(?:u|\\S[aei]|[^o]o)p",
     "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
@@ -75,7 +75,8 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
 const REG_SPECIAL_RO = new RegExp(`(?:${[
     "[178ㄹ]",
     "^[lr]",
-    "\\S+le?",
+    "^[ou]r",
+    "\\Sle?",
 ].join("|")})$`, "i");
 
 /**
@@ -110,48 +111,37 @@ const SPECIAL_POSTPOSITION = (() => {
     return special;
 })();
 
-
-/**
- * 조사가 '로'면 종성이 리을이 아닌 조건
- *
- * @private
- * @param type {string} 조사
- * @param state {boolean} 종성이 있는지 여부
- * @return {boolean}
- */
-const checkRo = (type, state) => (type !== "로" && type !== "으로") || !state;
-
 /**
  * 종성이 있는 문자열 체크
  *
  * @private
  * @param text {string} 종성이 있는지를 확인할 문자열
- * @param type {string} 조사
+ * @param isRo {boolean} 조사가 '로/으로'인지 여부
  * @return {boolean}
  */
-const checkText = (text, type) =>
-    // 지정한 종성이 없는 글자가 아닌 경우
-    !REG_NORMAL_FIXED.test(text) &&
-    // 종성이 있을 때
-    REG_SPECIAL_CHAR.test(text) &&
-    // 조사가 '로'인 경우 구분
-    checkRo(type, REG_SPECIAL_RO.test(text));
+const checkText = (text, isRo) => {
+    if (REG_NORMAL_FIXED.test(text)) {
+        return false;
+    }
+
+    // 한글 외에 'ㄹ' 종성 판단은 종성 유무 조건과 분리하여 개별 처리
+    return REG_SPECIAL_CHAR.test(text) || (!isRo && REG_SPECIAL_RO.test(text));
+};
 
 /**
  * 종성이 있는 한글의 유니 코드 체크
  *
  * @private
  * @param code {number} 유니 코드
- * @param type {string} 조사('로/으로'의 경우가 아니면 type 파라미터를 생략)
+ * @param isRo {boolean} 조사가 '로/으로'인지 여부
  * @returns {boolean}
  */
-const checkCode = (code, type) => {
+const checkCode = (code, isRo) => {
     const finalConsonantCode = (code - KO_START_CODE) % 28;
 
     // 종성이 있는 경우를 체크하고, 조사 '로'일 때 종성이 'ㄹ'인지 여부 추가 체크
-    return finalConsonantCode !== 0 && checkRo(type, finalConsonantCode === 8);
+    return finalConsonantCode !== 0 && !(isRo && finalConsonantCode === 8);
 };
-
 
 /**
  * 종성이 있는 문자열인지 여부
@@ -164,10 +154,10 @@ const checkCode = (code, type) => {
 export const check = (text, type) => {
     const target = text.replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
     const code = target.charAt(target.length - 1).charCodeAt();
-    const korean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
+    const isKorean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
+    const isRo = type === "로" || type === "으로";
 
-    // 한글이면 유니코드를 분석하고, 그 외에는 정규식 체크
-    return korean ? checkCode(code, type) : checkText(target, type);
+    return isKorean ? checkCode(code, isRo) : checkText(target, isRo);
 };
 
 /**
