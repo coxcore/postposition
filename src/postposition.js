@@ -62,7 +62,8 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
     "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
     "(?:\\S[iou]|[^e][ae])c?k",
     "\\S[aeiou](?:c|ng)",
-    "app|foot|go+d|big|bag|private",
+    "foot|go+d|b[ai]g|private",
+    "^(?:app|kor)",
 ].join("|")})$`, "i");
 
 /**
@@ -74,7 +75,7 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
 const REG_SPECIAL_RO = new RegExp(`(?:${[
     "[178ㄹ]",
     "^[lr]",
-    "^[ou]r",
+    "^\\Sr",
     "\\Sle?",
 ].join("|")})$`, "i");
 
