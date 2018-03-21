@@ -14,7 +14,7 @@ $ npm install cox-postposition
 ```
 
 `npm install`을 통해 설치하는 경우 `ES6` 문법으로 작성한 원본 JS 파일을 참조합니다.
-따라서 `ES6`를 지원하지 않는 환경에서는 [UMD](#umd) 사용법을 참고하여 사용하시기 바랍니다
+따라서 `ES6`를 지원하지 않는 환경에서는 [UMD](#umd---es6-module을-지원하지-않는-환경) 사용법을 참고하여 사용하시기 바랍니다
 
 #### CDN
 ```html
