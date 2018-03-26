@@ -3,7 +3,7 @@
 
 ## 예제
 
-[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.0.1/demo/index.html)
+[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.0.2/demo/index.html)
 
 ## 설치하기
 
@@ -14,11 +14,11 @@ $ npm install cox-postposition
 ```
 
 `npm install`을 통해 설치하는 경우 `ES6` 문법으로 작성한 원본 JS 파일을 참조합니다.
-따라서 `ES6`를 지원하지 않는 환경에서는 [UMD](#umd) 사용법을 참고하여 사용하시기 바랍니다
+따라서 `ES6`를 지원하지 않는 환경에서는 [UMD](#umd---es6-module을-지원하지-않는-환경) 사용법을 참고하여 사용하시기 바랍니다
 
 #### CDN
 ```html
-https://cdn.rawgit.com/coxcore/postposition/1.0.1/dist/cox.postposition.min.js
+https://cdn.rawgit.com/coxcore/postposition/1.0.2/dist/cox.postposition.min.js
 ```
 
 #### DOWNLOAD
@@ -57,7 +57,7 @@ console.log(num); // 8을
 #### HTML
 
 ```html
-<script src="https://cdn.rawgit.com/coxcore/postposition/1.0.1/dist/cox.postposition.min.js"></script>
+<script src="https://cdn.rawgit.com/coxcore/postposition/1.0.2/dist/cox.postposition.min.js"></script>
 
 <script>
   var kor = cox.postposition.put('고양이', '을');

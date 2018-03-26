@@ -54,8 +54,7 @@ const REG_NORMAL_FIXED = new RegExp(`(?:${[
  * @type {RegExp}
  */
 const REG_SPECIAL_CHAR = new RegExp(`(?:${[
-    "[ㄱ-ㄷㅁ-ㅎ]",
-    "[036]",
+    "[ㄱ-ㄷㅁ-ㅎ036]",
     "^[mn]",
     "\\S[mn]e?",
     "\\S(?:[aeiom]|lu)b",
@@ -63,7 +62,8 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
     "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
     "(?:\\S[iou]|[^e][ae])c?k",
     "\\S[aeiou](?:c|ng)",
-    "app|foot|go+d|big|bag|private",
+    "foot|go+d|b[ai]g|private",
+    "^(?:app|kor)",
 ].join("|")})$`, "i");
 
 /**
@@ -75,7 +75,7 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
 const REG_SPECIAL_RO = new RegExp(`(?:${[
     "[178ㄹ]",
     "^[lr]",
-    "^[ou]r",
+    "^\\Sr",
     "\\Sle?",
 ].join("|")})$`, "i");
 
@@ -197,9 +197,7 @@ export const put = (text, type, special) => `${text}${pick(text, type, special)}
  * @param type {string} 조사
  * @param special {string} 종성이 없을 때 조사
  */
-export const fix = (type, special) => function(text) {
-    return put(text, type, special);
-};
+export const fix = (type, special) => (text => put(text, type, special));
 
 export default {
     check, pick, put, fix
