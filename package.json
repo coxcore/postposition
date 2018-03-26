@@ -1,6 +1,6 @@
 {
   "name": "cox-postposition",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "한글, 영문, 숫자에 대한 한글 조사를 처리하는 Javascript Library 입니다.",
   "main": "src/postposition.js",
   "scripts": {
