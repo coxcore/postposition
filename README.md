@@ -123,7 +123,7 @@ putRang('rock'); // rock이랑
 개별 메서드만 사용할 수도 있습니다.
 
 ```js
-import { check, pick, put, fix } from 'cox-postposition';
+import { check, pick, put, parse, fix } from 'cox-postposition';
 
 // 종성이 있는지 여부
 check('바다'); // false
@@ -133,6 +133,10 @@ pick('고양이', '이'); // 가
 
 // 입력한 단어에 조사 적용
 put('cat', '을'); // cat을
+
+// 입력한 문장에 조사 적용
+parse('하늘[와|과] 땅'); // 하늘과 땅
+
 
 // 지정한 조사만 처리 함수 생성
 const putEul = fix('을');
