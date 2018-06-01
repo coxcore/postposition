@@ -80,6 +80,14 @@ const REG_SPECIAL_RO = new RegExp(`(?:${[
 ].join("|")})$`, "i");
 
 /**
+ * 조사를 처리할 단어를 찾는 정규식
+ *
+ * @private
+ * @type {RegExp}
+ */
+const REG_PARSER_PATTERN = /(\S*)\[([\w가-힣]*)\|([\w가-힣]*)\]/g;
+
+/**
  * 기본적으로 지원하는 조사
  *
  * @private
@@ -153,6 +161,17 @@ const checkCode = (code, isRo) => {
 const isString = text => typeof text === 'string';
 
 /**
+ * 문장에서 찾은 패턴을 처리하는 callback function
+ *
+ * @private
+ * @param target 패턴과 일치하는 문자열
+ * @param word 대상 단어
+ * @param normal 종성이 없을 때 조사
+ * @param special 종성이 있을 때 조사
+ */
+const callbackParser = (target, word, normal, special) => put(word, normal, special);
+
+/**
  * 종성이 있는 문자열인지 여부
  * '로/으로'의 경우가 아니면 type 파라미터를 생략해도 된다.
  *
@@ -218,6 +237,18 @@ export const put = (text, type, special = null) => isString(text) ?
  */
 export const fix = (type, special) => (text => put(text, type, special));
 
+/**
+ * 문자열에서 특정 패턴을 찾아 해당 문자에 맞는 조사를 처리
+ * 찾는 패턴 : 단어[ 종성이 없을 때 조사 | 종성이 있을 때 조사 ]
+ * ex) 문자열[를|을] 변경 => 문자열을 변경
+ *
+ * @param sentence 처리할 문자열
+ * @returns {string|*}
+ */
+export const parse = (sentence) => (typeof sentence === 'string') ?
+    sentence.replace(REG_PARSER_PATTERN, callbackParser) : sentence;
+
+
 export default {
-    check, pick, put, fix
+    check, pick, put, fix, parse
 }
