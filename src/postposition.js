@@ -176,7 +176,7 @@ export const check = (text, type = null) => {
 /**
  * 글자에 해당하는 조사를 반환
  * 아래 조사에 대해서는 special 파라미터를 전달하지 않아도 된다.
- * 은/는, 이/가, 을/를, 과/와, 로/으로
+ * 은/는, 이/가, 을/를, 과/와, 나/이나, 로/으로
  *
  * @param text {string} 조사를 붙일 문자열
  * @param type {string} 조사
@@ -214,6 +214,7 @@ export const put = (text, type, special = null) => isString(text) ?
  *
  * @param type {string} 조사
  * @param special {string} 종성이 없을 때 조사
+ * @return {function}
  */
 export const fix = (type, special) => (text => put(text, type, special));
 
