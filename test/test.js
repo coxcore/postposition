@@ -53,6 +53,16 @@
 
 
     var errors = [];
+    var checkType = function(value, result, pp) {
+        if (postposition.check(value) !== result) {
+            errors.push(String(value) + ' - checkType');
+        }
+    };
+    var checkInvalidData = function(value, result, pp) {
+        if (postposition.put(value, pp) !== result) {
+            errors.push(String(value) + ' - checkInvalidData');
+        }
+    };
     var checkArr = function(list, result, pp) {
         list.split("/").forEach(function(text) {
             if (postposition.check(text, pp) !== result) {
@@ -60,7 +70,28 @@
             }
         });
     };
+    var checkParser = function(list, pp, pattern) {
+        list.split("/").forEach(function(text) {
+            var sentence = text + "[" + pattern + "]";
+            var value = postposition.parse(sentence);
+            var result = text + pp;
 
+            if (value !== result) {
+                errors.push(sentence + " : " + value);
+            }
+        });
+    };
+
+
+    checkType(1, true);
+    checkType(2, false);
+    checkType({}, false);
+    checkType(null, false);
+    checkType(undefined, false);
+
+    checkInvalidData({}, "[object Object]가", "이");
+    checkInvalidData(undefined, "undefined가", "이");
+    checkInvalidData(null, "null이", "이");
 
     checkArr(basic, false, "이");
     checkArr(special, true, "이");
@@ -69,6 +100,9 @@
     checkArr(special, true, "으로");
     checkArr(ro, false, "으로");
 
+    checkParser(basic, "가", "가|이");
+    checkParser(special, "이", "가|이");
+    checkParser(ro, "이", "가|이");
 
     console.log("> cox.postposition errors :", errors.length);
 
