@@ -147,11 +147,11 @@ const checkCode = (code, isRo) => {
  * 종성이 있는 문자열인지 여부
  * '로/으로'의 경우가 아니면 type 파라미터를 생략해도 된다.
  *
- * @param text 체크할 문자열
- * @param type 조사('로/으로'의 경우가 아니면 type 파라미터를 생략)
+ * @param text {string} 체크할 문자열
+ * @param type {string|null} 조사('로/으로'의 경우가 아니면 type 파라미터를 생략)
  * @returns {boolean}
  */
-export const check = (text, type) => {
+export const check = (text, type = null) => {
     const target = text.replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
     const code = target.charAt(target.length - 1).charCodeAt();
     const isKorean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
@@ -167,10 +167,10 @@ export const check = (text, type) => {
  *
  * @param text {string} 조사를 붙일 문자열
  * @param type {string} 조사
- * @param special {string} 종성이 있을 때 조사
+ * @param special {string|null} 종성이 있을 때 조사
  * @returns {string}
  */
-export const pick = (text, type, special) => {
+export const pick = (text, type, special = null) => {
     if (typeof special !== "string") {
         type = DEFAULT_POSTPOSITION[type] || type || "";
         special = SPECIAL_POSTPOSITION[type] || type;
@@ -185,10 +185,10 @@ export const pick = (text, type, special) => {
  *
  * @param text {string} 조사를 붙일 문자열
  * @param type {string} 조사
- * @param special {string} 종성이 있을 때 조사
+ * @param special {string|null} 종성이 있을 때 조사
  * @return {string}
  */
-export const put = (text, type, special) => `${text}${pick(text, type, special)}`;
+export const put = (text, type, special = null) => `${text}${pick(text, type, special)}`;
 
 /**
  * 특정 조사를 처리하는 함수를 반환
