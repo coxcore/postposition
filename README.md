@@ -34,10 +34,12 @@ import postposition from 'cox-postposition';
 const kor = postposition.put('고양이', '을');
 const eng = postposition.put('cat', '을');
 const num = postposition.put('8', '을');
+const sentence = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
+console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
 ```
 
 #### UMD - ES6 Module을 지원하지 않는 환경
@@ -48,10 +50,12 @@ const postposition = require('cox-postposition/dist/cox.postposition.min.js');
 const kor = postposition.put('고양이', '을');
 const eng = postposition.put('cat', '을');
 const num = postposition.put('8', '을');
+const sentence = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
+console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
 ```
 
 #### HTML
@@ -63,10 +67,12 @@ console.log(num); // 8을
   var kor = cox.postposition.put('고양이', '을');
   var eng = cox.postposition.put('cat', '을');
   var num = cox.postposition.put('8', '을');
+  var sentence = cox.postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
 
   console.log(kor); // 고양이를
   console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
   console.log(num); // 8을
+  console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
 </script>
 ```
 
@@ -98,6 +104,11 @@ postposition.put('[cat]', '를'); // [cat]을
 // 은/는, 이/가, 을/를, 과/와, 나/이나, 로/으로 이외의 조사 처리 (종성이 없는 조건을 먼저 입력)
 postposition.put('고양이', '야', '아'); // 고양이야
 postposition.put('야옹', '야', '아'); // 야옹아
+
+// 입력한 문장에서 조사 적용
+postposition.parse('예제1[와|과] 예제2[를|을] 확인하세요.'); // 예제1과 예제2를 확인하세요.
+postposition.parse('예제[1][와|과] 예제[2][를|을] 확인하세요.'); // 예제[1]과 예제[2]를 확인하세요.
+postposition.parse('음식[|이]면 A, food[|이]면 B'); // 음식이면 A, food면 B
 
 // 지정한 조사만 처리하는 함수 생성
 const putEul = postposition.fix('을');
@@ -271,6 +282,23 @@ eun('구름'); // 구름은
 eul('구름'); // 구름을
 ya('구름'); // 구름아
 
+```
+
+
+### parse( sentence )
+
+> 문장에서 `단어[ 종성이 없을 때 조사 | 종성이 있을 때 조사 ]` 패턴을 찾아서 해당 단어의 조사를 처리합니다.
+
+* `sentence`: 처리할 문장
+
+문장에서 특정 단어에 대한 조사를 처리할 때 사용할 수 있습니다.
+
+```js
+const result1 = postposition.parse('망치[를|을] 만드려면 손잡이[가|이] 필요합니다.');
+const result2 = postposition.parse('그림[P][와|과] 그림[L][는|은] animal[를|을] 포함합니다.');
+
+console.log(result1); // 망치를 만드려면 손잡이가 필요합니다.
+console.log(result2); // 그림[P]와 그림[L]은 animal을 포함합니다.
 ```
 
 ## Guide
