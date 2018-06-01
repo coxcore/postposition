@@ -3,7 +3,7 @@
 
 ## 예제
 
-[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.0.2/demo/index.html)
+[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.1.0/demo/index.html)
 
 ## 설치하기
 
@@ -18,7 +18,7 @@ $ npm install cox-postposition
 
 #### CDN
 ```html
-https://cdn.rawgit.com/coxcore/postposition/1.0.2/dist/cox.postposition.min.js
+https://cdn.rawgit.com/coxcore/postposition/1.1.0/dist/cox.postposition.min.js
 ```
 
 #### DOWNLOAD
@@ -61,7 +61,7 @@ console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
 #### HTML
 
 ```html
-<script src="https://cdn.rawgit.com/coxcore/postposition/1.0.2/dist/cox.postposition.min.js"></script>
+<script src="https://cdn.rawgit.com/coxcore/postposition/1.1.0/dist/cox.postposition.min.js"></script>
 
 <script>
   var kor = cox.postposition.put('고양이', '을');
