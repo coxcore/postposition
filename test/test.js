@@ -70,6 +70,17 @@
             }
         });
     };
+    var checkParser = function(list, pp, pattern) {
+        list.split("/").forEach(function(text) {
+            var sentence = text + "[" + pattern + "]";
+            var value = postposition.parse(sentence);
+            var result = text + pp;
+
+            if (value !== result) {
+                errors.push(sentence + " : " + value);
+            }
+        });
+    };
 
 
     checkType(1, true);
@@ -89,6 +100,9 @@
     checkArr(special, true, "으로");
     checkArr(ro, false, "으로");
 
+    checkParser(basic, "가", "가|이");
+    checkParser(special, "이", "가|이");
+    checkParser(ro, "이", "가|이");
 
     console.log("> cox.postposition errors :", errors.length);
 
