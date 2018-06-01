@@ -53,6 +53,16 @@
 
 
     var errors = [];
+    var checkType = function(value, result, pp) {
+        if (postposition.check(value) !== result) {
+            errors.push(String(value) + ' - checkType');
+        }
+    };
+    var checkInvalidData = function(value, result, pp) {
+        if (postposition.put(value, pp) !== result) {
+            errors.push(String(value) + ' - checkInvalidData');
+        }
+    };
     var checkArr = function(list, result, pp) {
         list.split("/").forEach(function(text) {
             if (postposition.check(text, pp) !== result) {
@@ -61,6 +71,16 @@
         });
     };
 
+
+    checkType(1, true);
+    checkType(2, false);
+    checkType({}, false);
+    checkType(null, false);
+    checkType(undefined, false);
+
+    checkInvalidData({}, "[object Object]가", "이");
+    checkInvalidData(undefined, "undefined가", "이");
+    checkInvalidData(null, "null이", "이");
 
     checkArr(basic, false, "이");
     checkArr(special, true, "이");

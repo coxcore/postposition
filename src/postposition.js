@@ -144,6 +144,19 @@ const checkCode = (code, isRo) => {
 };
 
 /**
+ * 문자열로 사용 가능한지 여부 체크
+ *
+ * @private
+ * @param text {string}
+ * @returns {boolean}
+ */
+const invalidText = text => {
+    const type = typeof text;
+
+    return type !== 'string' && type !== 'number';
+};
+
+/**
  * 종성이 있는 문자열인지 여부
  * '로/으로'의 경우가 아니면 type 파라미터를 생략해도 된다.
  *
@@ -152,7 +165,11 @@ const checkCode = (code, isRo) => {
  * @returns {boolean}
  */
 export const check = (text, type = null) => {
-    const target = text.replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
+    if (invalidText(text)) {
+        return false;
+    }
+
+    const target = String(text).replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
     const code = target.charAt(target.length - 1).charCodeAt();
     const isKorean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
     const isRo = type === "로" || type === "으로";
@@ -176,7 +193,7 @@ export const pick = (text, type, special = null) => {
         special = SPECIAL_POSTPOSITION[type] || type;
     }
 
-    return check(text, type) ? special : type;
+    return check(String(text), type) ? special : type;
 };
 
 /**
