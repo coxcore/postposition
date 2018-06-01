@@ -2,73 +2,162 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .wrap {
-            padding: 10px;
-        }
-
-        span[contenteditable] {
-            display: inline-block;
-            padding: 5px;
-            min-width: 50px;
-            text-align: center;
-            font-weight: bold;
-            background: #efefef;
-
-        }
-
-        span[contenteditable] + span {
-            display: inline-block;
-            text-align: center;
-            min-width: 35px;
-        }
-    </style>
+    <title>DEMO - cox-postposition</title>
+    <link rel="stylesheet" href="./css/demo.css">
 </head>
 <body>
-<div id="default-supported" class="wrap">
-    <span contenteditable>A</span><span>는</span>
-    <span contenteditable>B</span><span>가</span>
-    <span contenteditable>C</span><span>와</span>
-    <span contenteditable>D</span><span>를</span>
-    <span contenteditable>E</span><span>나</span>
-    <span contenteditable>F</span><span>로</span>
-    변경합니다.
-</div>
+<h2>Method</h2>
+<p>예제의 파라미터 값을 변경해보세요. <br>기본적으로 지원하는 조사는 <span class="comment">은/는, 이/가, 와/과, 을/를, 나/이나, 로/으로</span> 입니다.</p>
+
+<h3>put( text, type, special )</h3>
 <hr>
-<div id="search-example" class="wrap">
-    <input type="text">
-    <p id="search-result">단어를 입력해 주세요.</p>
+<p>단어에 맞는 조사를 적용한 결과를 반환</p>
+<h4>Parameters</h4>
+<ul>
+    <li>text : 조사를 적용할 단어</li>
+    <li>type : 종성이 없을 때 조사(기본 조사는 종성 유무와 상관 없이 사용하고 special 생략)</li>
+    <li>special : 종성이 있을 때 조사(기본 조사 사용시 생략)</li>
+</ul>
+<div class="wrap" data-example="put">
+    <p>
+        <span class="comment">// 기본 지원 조사</span><br>
+        postposition.put(
+        "<input size="1" value="예제" data-param data-autosize>",
+        "<input size="1" value="과" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+<div class="wrap" data-example="put">
+    <p>
+        <span class="comment">// 사용자 지정 조사</span><br>
+        postposition.put(
+        "<input size="1" value="음식" data-param data-autosize>",
+        "<input size="1" value="여서" data-param data-autosize>",
+        "<input size="1" value="이어서" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+
+<h3>pick( text, type, special )</h3>
+<hr>
+<p>단어에 맞는 조사를 반환</p>
+<h4>Parameters</h4>
+<ul>
+    <li>text : 조사를 적용할 단어</li>
+    <li>type : 종성이 없을 때 조사(기본 조사는 종성 유무와 상관 없이 사용하고 special 생략)</li>
+    <li>special : 종성이 있을 때 조사(기본 조사 사용시 생략)</li>
+</ul>
+<div class="wrap" data-example="pick">
+    <p>
+        <span class="comment">// 기본 지원 조사</span><br>
+        postposition.pick(
+        "<input size="1" value="고양이" data-param data-autosize>",
+        "<input size="1" value="이" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+<div class="wrap" data-example="pick">
+    <p>
+        <span class="comment">// 사용자 지정 조사</span><br>
+        postposition.pick(
+        "<input size="1" value="고양이" data-param data-autosize>",
+        "<input size="1" value="야" data-param data-autosize>",
+        "<input size="1" value="아" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+
+<h3>parse( sentence )</h3>
+<hr>
+<p>문장에서 패턴을 찾아 조사를 적용 (패턴 : 단어[ 종성이 없을때 조사 | 종성이 있을 때 조사 ])</p>
+<h4>Parameters</h4>
+<ul>
+    <li>sentence : 처리할 문장</li>
+</ul>
+<div class="wrap" data-example="parse">
+    <p>
+        postposition.parse(
+        "<input size="1" value="하늘[를|을] 선택하면 wing[가|이] 활성화 됩니다." data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+
+<h3>fix( type, special )</h3>
+<hr>
+<p>지정한 조사를 처리하는 함수 반환</p>
+<h4>Parameters</h4>
+<ul>
+    <li>type : 종성이 없을 때 조사(기본 조사는 종성 유무와 상관 없이 사용하고 special 생략)</li>
+    <li>special : 종성이 있을 때 조사(기본 조사 사용시 생략)</li>
+</ul>
+<div class="wrap" data-example="fn_fix1">
+    <p>
+        <span class="comment">// 기본 지원 조사</span><br>
+        var pp = postposition.fix(
+        "<input size="1" value="은" data-fix-param data-autosize>"
+        );
+    </p>
+    <p>
+        pp(
+        "<input size="1" value="요리" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+<div class="wrap" data-example="fn_fix2">
+    <p>
+        <span class="comment">// 사용자 지정 조사</span><br>
+        var pp = postposition.fix(
+        "<input size="1" value="면" data-fix-param data-autosize>",
+        "<input size="1" value="이면" data-fix-param data-autosize>"
+        );
+    </p>
+    <p>
+        pp(
+        "<input size="1" value="아이템" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+
+<h3>check( text, type )</h3>
+<hr>
+<p>종성이 있는지 여부 확인</p>
+<h4>Parameters</h4>
+<ul>
+    <li>text : 조사를 적용할 단어</li>
+    <li>type : '로/으로'를 확인하는 용도가 아닌 경우는 생략</li>
+</ul>
+<div class="wrap" data-example="check">
+    <p>
+        postposition.check(
+        "<input size="1" value="하늘" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+<div class="wrap" data-example="check">
+    <p>
+        <span class="comment">// '로/으로'일 때 종성이 있는지 여부</span><br>
+        postposition.check(
+        "<input size="1" value="하늘" data-param data-autosize>",
+        "<input size="1" value="로" data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="./js/demo.js"></script>
 <script type="module">
     import postposition from '../src/postposition.js';
 
-    $('#default-supported').on('input.sample blur.sample change.sample', '[contenteditable]', event => {
-        const $span = $(event.currentTarget);
-        const $postposition = $span.next();
-        const text = $span.text();
-        const type = $.trim($postposition.text());
-        const pp = postposition.pick(text, type); // 단어에 적용할 조사 반환
-
-        $postposition.text(pp);
-    });
-
-    $('#search-example').on('input.sample blur.sample change.sample', 'input:text', event => {
-        const $input = $(event.currentTarget);
-        const value = $input.val();
-        let result = '';
-
-        if (value) {
-            const text = postposition.put(`'${value}'`, '을');
-            result = `${text} 입력했습니다.`;
-        } else {
-            result = '단어를 입력해 주세요.';
-        }
-
-        $('#search-result').text(result);
-    });
+    initDemo(jQuery, postposition);
 </script>
 </body>
 </html>

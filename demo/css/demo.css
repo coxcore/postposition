@@ -1,0 +1,54 @@
+.wrap {
+    padding: 10px;
+}
+
+h3 {
+    margin: 40px 0 0;
+}
+
+h4 {
+    margin: 0 0 -5px;
+    padding: 0 10px;
+}
+
+p {
+    margin: 20px 0;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #999;
+}
+
+input {
+    font-size: 12pt;
+    text-align: center;
+}
+
+#text-size {
+    height:1px;
+    overflow-y:hidden;
+    position: absolute;
+    top: -100px;
+}
+
+#default-supported input {
+    padding: 0 5px;
+    margin: 0 2px 0 5px;
+}
+
+[data-example] {
+    background: #efefef;
+    margin: 5px 10px;
+    padding: 1px 20px;
+}
+
+[data-result] {
+    color: #f00;
+}
+
+.comment {
+    color: #888;
+    font-style: italic;
+}
