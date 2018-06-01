@@ -144,6 +144,15 @@ const checkCode = (code, isRo) => {
 };
 
 /**
+ * 문자열 여부 체크
+ *
+ * @private
+ * @param text {string}
+ * @returns {boolean}
+ */
+const isString = text => typeof text === 'string';
+
+/**
  * 종성이 있는 문자열인지 여부
  * '로/으로'의 경우가 아니면 type 파라미터를 생략해도 된다.
  *
@@ -152,6 +161,10 @@ const checkCode = (code, isRo) => {
  * @returns {boolean}
  */
 export const check = (text, type = null) => {
+    if (!isString(text)) {
+        return false;
+    }
+
     const target = text.replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
     const code = target.charAt(target.length - 1).charCodeAt();
     const isKorean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
@@ -168,9 +181,13 @@ export const check = (text, type = null) => {
  * @param text {string} 조사를 붙일 문자열
  * @param type {string} 조사
  * @param special {string|null} 종성이 있을 때 조사
- * @returns {string}
+ * @returns {string|*}
  */
 export const pick = (text, type, special = null) => {
+    if (!isString(text)) {
+        return text;
+    }
+
     if (typeof special !== "string") {
         type = DEFAULT_POSTPOSITION[type] || type || "";
         special = SPECIAL_POSTPOSITION[type] || type;
@@ -186,9 +203,10 @@ export const pick = (text, type, special = null) => {
  * @param text {string} 조사를 붙일 문자열
  * @param type {string} 조사
  * @param special {string|null} 종성이 있을 때 조사
- * @return {string}
+ * @return {string|*}
  */
-export const put = (text, type, special = null) => `${text}${pick(text, type, special)}`;
+export const put = (text, type, special = null) => isString(text) ?
+    `${text}${pick(text, type, special)}` : text;
 
 /**
  * 특정 조사를 처리하는 함수를 반환
