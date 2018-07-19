@@ -8,9 +8,6 @@
     "build": "./node_modules/.bin/webpack && npm run test"
   },
   "keywords": [
-    "cox",
-    "coxcore",
-    "ascript",
     "postposition",
     "korean",
     "josa",
@@ -20,7 +17,12 @@
     "이/가",
     "을/를",
     "과/와",
-    "로/으로"
+    "로/으로",
+    "js",
+    "javascript",
+    "cox",
+    "coxcore",
+    "ascript"
   ],
   "author": {
     "name": "Park U-yeong",
