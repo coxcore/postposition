@@ -1,6 +1,6 @@
 {
   "name": "cox-postposition",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "한글, 영문, 숫자에 대한 한글 조사를 처리하는 Javascript Library 입니다.",
   "main": "src/postposition.js",
   "scripts": {
@@ -8,9 +8,6 @@
     "build": "./node_modules/.bin/webpack && npm run test"
   },
   "keywords": [
-    "cox",
-    "coxcore",
-    "ascript",
     "postposition",
     "korean",
     "josa",
@@ -20,7 +17,12 @@
     "이/가",
     "을/를",
     "과/와",
-    "로/으로"
+    "로/으로",
+    "js",
+    "javascript",
+    "cox",
+    "coxcore",
+    "ascript"
   ],
   "author": {
     "name": "Park U-yeong",

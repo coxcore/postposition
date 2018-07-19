@@ -85,7 +85,7 @@ const REG_SPECIAL_RO = new RegExp(`(?:${[
  * @private
  * @type {RegExp}
  */
-const REG_PARSER_PATTERN = /(\S*)\[([\w가-힣]*)\|([\w가-힣]*)\]/g;
+const REG_PARSER_PATTERN = /(\S*)\[([\w가-힣]*)(?:\*|\|([\w가-힣]*))\]/g;
 
 /**
  * 기본적으로 지원하는 조사

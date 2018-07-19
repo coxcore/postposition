@@ -3,7 +3,7 @@
 
 ## 예제
 
-[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.1.0/demo/index.html)
+[예제 보기](https://cdn.rawgit.com/coxcore/postposition/1.2.0/demo/index.html)
 
 ## 설치하기
 
@@ -18,7 +18,11 @@ $ npm install cox-postposition
 
 #### CDN
 ```html
-https://cdn.rawgit.com/coxcore/postposition/1.1.0/dist/cox.postposition.min.js
+// rawgit
+https://cdn.rawgit.com/coxcore/postposition/1.2.0/dist/cox.postposition.min.js
+
+// jsdelivr
+https://cdn.jsdelivr.net/npm/cox-postposition@1.2.0/dist/cox.postposition.min.js
 ```
 
 #### DOWNLOAD
@@ -34,12 +38,14 @@ import postposition from 'cox-postposition';
 const kor = postposition.put('고양이', '을');
 const eng = postposition.put('cat', '을');
 const num = postposition.put('8', '을');
-const sentence = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+const sentence1 = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+const sentence2 = postposition.parse('바다[로*] 이동하면 잠수함[를*] 얻습니다.');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
-console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
+console.log(sentence1); // 바다로 이동하면 잠수함을 얻습니다.
+console.log(sentence2); // 바다로 이동하면 잠수함을 얻습니다.
 ```
 
 #### UMD - ES6 Module을 지원하지 않는 환경
@@ -50,29 +56,33 @@ const postposition = require('cox-postposition/dist/cox.postposition.min.js');
 const kor = postposition.put('고양이', '을');
 const eng = postposition.put('cat', '을');
 const num = postposition.put('8', '을');
-const sentence = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+const sentence1 = postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+const sentence2 = postposition.parse('바다[로*] 이동하면 잠수함[를*] 얻습니다.');
 
 console.log(kor); // 고양이를
 console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
 console.log(num); // 8을
-console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
+console.log(sentence1); // 바다로 이동하면 잠수함을 얻습니다.
+console.log(sentence2); // 바다로 이동하면 잠수함을 얻습니다.
 ```
 
 #### HTML
 
 ```html
-<script src="https://cdn.rawgit.com/coxcore/postposition/1.1.0/dist/cox.postposition.min.js"></script>
+<script src="https://cdn.rawgit.com/coxcore/postposition/1.2.0/dist/cox.postposition.min.js"></script>
 
 <script>
   var kor = cox.postposition.put('고양이', '을');
   var eng = cox.postposition.put('cat', '을');
   var num = cox.postposition.put('8', '을');
-  var sentence = cox.postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+  var sentence1 = cox.postposition.parse('바다[로|으로] 이동하면 잠수함[를|을] 얻습니다.');
+  var sentence2 = cox.postposition.parse('바다[로*] 이동하면 잠수함[를*] 얻습니다.');
 
   console.log(kor); // 고양이를
   console.log(eng); // cat을 ('씨에이티를'이 아닌 '캣을'로 처리)
   console.log(num); // 8을
-  console.log(sentence); // 바다로 이동하면 잠수함을 얻습니다.
+  console.log(sentence1); // 바다로 이동하면 잠수함을 얻습니다.
+  console.log(sentence2); // 바다로 이동하면 잠수함을 얻습니다.
 </script>
 ```
 
@@ -105,7 +115,11 @@ postposition.put('[cat]', '를'); // [cat]을
 postposition.put('고양이', '야', '아'); // 고양이야
 postposition.put('야옹', '야', '아'); // 야옹아
 
-// 입력한 문장에서 조사 적용
+// 입력한 문장에서 기본 지원 조사 적용
+postposition.parse('예제1[와*] 예제2[을*] 확인하세요.'); // 예제1과 예제2를 확인하세요.
+postposition.parse('예제[1][과*] 예제[2][를*] 확인하세요.'); // 예제[1]과 예제[2]를 확인하세요.
+
+// 입력한 문장에서 사용자 정의 조사 적용
 postposition.parse('예제1[와|과] 예제2[를|을] 확인하세요.'); // 예제1과 예제2를 확인하세요.
 postposition.parse('예제[1][와|과] 예제[2][를|을] 확인하세요.'); // 예제[1]과 예제[2]를 확인하세요.
 postposition.parse('음식[|이]면 A, food[|이]면 B'); // 음식이면 A, food면 B
@@ -135,6 +149,7 @@ pick('고양이', '이'); // 가
 put('cat', '을'); // cat을
 
 // 입력한 문장에 조사 적용
+parse('하늘[와*] 땅'); // 하늘과 땅
 parse('하늘[와|과] 땅'); // 하늘과 땅
 
 
@@ -291,7 +306,7 @@ ya('구름'); // 구름아
 
 ### parse( sentence )
 
-> 문장에서 `단어[ 종성이 없을 때 조사 | 종성이 있을 때 조사 ]` 패턴을 찾아서 해당 단어의 조사를 처리합니다.
+> 문장에서 `단어[조사*]` 혹은 `단어[종성이 없을 때 조사|종성이 있을 때 조사]` 패턴을 찾아서 해당 단어의 조사를 처리합니다.
 
 * `sentence`: 처리할 문장
 
@@ -300,6 +315,16 @@ ya('구름'); // 구름아
 ```js
 const result1 = postposition.parse('망치[를|을] 만드려면 손잡이[가|이] 필요합니다.');
 const result2 = postposition.parse('그림[P][와|과] 그림[L][는|은] animal[를|을] 포함합니다.');
+
+console.log(result1); // 망치를 만드려면 손잡이가 필요합니다.
+console.log(result2); // 그림[P]와 그림[L]은 animal을 포함합니다.
+```
+
+`단어[조사*]` 패턴을 이용하면 문장에서 기본 지원 조사를 처리할 때 사용할 수 있습니다.
+
+```js
+const result1 = postposition.parse('망치[을*] 만드려면 손잡이[이*] 필요합니다.');
+const result2 = postposition.parse('그림[P][과*] 그림[L][는*] animal[를*] 포함합니다.');
 
 console.log(result1); // 망치를 만드려면 손잡이가 필요합니다.
 console.log(result2); // 그림[P]와 그림[L]은 animal을 포함합니다.
