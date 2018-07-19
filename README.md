@@ -18,7 +18,11 @@ $ npm install cox-postposition
 
 #### CDN
 ```html
+// rawgit
 https://cdn.rawgit.com/coxcore/postposition/1.1.0/dist/cox.postposition.min.js
+
+// jsdelivr
+https://cdn.jsdelivr.net/npm/cox-postposition@1.1.0/dist/cox.postposition.min.js
 ```
 
 #### DOWNLOAD
