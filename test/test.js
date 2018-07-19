@@ -101,8 +101,11 @@
     checkArr(ro, false, "으로");
 
     checkParser(basic, "가", "가|이");
+    checkParser(basic, "가", "이*");
     checkParser(special, "이", "가|이");
+    checkParser(special, "이", "이*");
     checkParser(ro, "이", "가|이");
+    checkParser(ro, "이", "이*");
 
     console.log("> cox.postposition errors :", errors.length);
 
