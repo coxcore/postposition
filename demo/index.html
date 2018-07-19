@@ -73,11 +73,23 @@
 
 <h3>parse( sentence )</h3>
 <hr>
-<p>문장에서 패턴을 찾아 조사를 적용 (패턴 : 단어[ 종성이 없을때 조사 | 종성이 있을 때 조사 ])</p>
+<p>문장에서 패턴을 찾아 조사를 적용 (패턴 : '단어[종성이 없을때 조사|종성이 있을 때 조사]' 혹은 '단어[조사*]')</p>
 <h4>Parameters</h4>
 <ul>
     <li>sentence : 처리할 문장</li>
 </ul>
+
+<h4>기본 지원 조사</h4>
+<div class="wrap" data-example="parse">
+    <p>
+        postposition.parse(
+        "<input size="1" value="하늘[를*] 선택하면 wing[가*] 활성화 됩니다." data-param data-autosize>"
+        )
+    </p>
+    <p>결과 : <span data-result></span></p>
+</div>
+
+<h4>사용자 지정 조사</h4>
 <div class="wrap" data-example="parse">
     <p>
         postposition.parse(
