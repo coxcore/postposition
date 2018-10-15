@@ -1,7 +1,9 @@
 {
-  "extends": "es2015",
+  "extends": "eslint:recommended",
   "parserOptions": {
+    "env": {
+      "es6" : true
+    },
     "sourceType": "module"
-  },
-  "plugins": ["import"]
+  }
 }

@@ -5,7 +5,7 @@
   "main": "src/postposition.js",
   "scripts": {
     "test": "node ./test/test.js",
-    "build": "./node_modules/.bin/webpack && npm run test"
+    "build": "npx webpack && npm run test"
   },
   "keywords": [
     "postposition",
@@ -20,6 +20,7 @@
     "로/으로",
     "js",
     "javascript",
+    "자바스크립트",
     "cox",
     "coxcore",
     "ascript"
@@ -34,15 +35,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^3.19.0",
-    "eslint-config-es2015": "^1.1.0",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.3.0",
-    "npm": "^5.3.0",
-    "webpack": "^2.5.1"
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.1.2",
+    "babel-loader": "^8.0.4",
+    "eslint": "^5.7.0",
+    "eslint-loader": "^2.1.1",
+    "npm": "^6.4.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   }
 }

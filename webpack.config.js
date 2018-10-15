@@ -1,7 +1,7 @@
-const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
+    mode: "production",
     entry: "./src/postposition.js",
 
     output: {
@@ -10,6 +10,7 @@ module.exports = {
         publicPath: "/dist",
         library: ["cox", "postposition"],
         libraryTarget: "umd",
+        globalObject: "(typeof self !== 'undefined' ? self : this)",
     },
 
     module: {
@@ -27,22 +28,4 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            debug: false,
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: false,
-            },
-            compress: {
-                screw_ie8: true,
-                drop_console: false,
-            },
-            comments: false,
-        }),
-    ],
 };
