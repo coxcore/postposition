@@ -44,8 +44,8 @@ const REG_TARGET_CHAR = /^[\s\S]*?(\S*)\s*$/;
  * @type {RegExp}
  */
 const REG_NORMAL_FIXED = new RegExp(`(?:${[
-    "check|[hm]ook|limit",
-].join("|")})$`, "i");
+    'check|[hm]ook|limit',
+].join('|')})$`, 'i');
 
 /**
  * 종성이 있는 조건 정규식
@@ -54,17 +54,17 @@ const REG_NORMAL_FIXED = new RegExp(`(?:${[
  * @type {RegExp}
  */
 const REG_SPECIAL_CHAR = new RegExp(`(?:${[
-    "[ㄱ-ㄷㅁ-ㅎ036]",
-    "^[mn]",
-    "\\S[mn]e?",
-    "\\S(?:[aeiom]|lu)b",
-    "(?:u|\\S[aei]|[^o]o)p",
-    "(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t",
-    "(?:\\S[iou]|[^e][ae])c?k",
-    "\\S[aeiou](?:c|ng)",
-    "foot|go+d|b[ai]g|private",
-    "^(?:app|kor)",
-].join("|")})$`, "i");
+    '[ㄱ-ㄷㅁ-ㅎ036]',
+    '^[mn]',
+    '\\S[mn]e?',
+    '\\S(?:[aeiom]|lu)b',
+    '(?:u|\\S[aei]|[^o]o)p',
+    '(?:^i|[^auh]i|\\Su|[^ei][ae]|[^oi]o)t',
+    '(?:\\S[iou]|[^e][ae])c?k',
+    '\\S[aeiou](?:c|ng)',
+    'foot|go+d|b[ai]g|private',
+    '^(?:app|kor)',
+].join('|')})$`, 'i');
 
 /**
  * 조사가 '로'일 때 종성이 없는 조건으로 간주하는 정규식
@@ -73,11 +73,11 @@ const REG_SPECIAL_CHAR = new RegExp(`(?:${[
  * @type {RegExp}
  */
 const REG_SPECIAL_RO = new RegExp(`(?:${[
-    "[178ㄹ]",
-    "^[lr]",
-    "^\\Sr",
-    "\\Sle?",
-].join("|")})$`, "i");
+    '[178ㄹ]',
+    '^[lr]',
+    '^\\Sr',
+    '\\Sle?',
+].join('|')})$`, 'i');
 
 /**
  * 조사를 처리할 단어를 찾는 정규식
@@ -94,12 +94,12 @@ const REG_PARSER_PATTERN = /(\S*)\[([\w가-힣]*)(?:\*|\|([\w가-힣]*))\]/g;
  * @type {object}
  */
 const DEFAULT_POSTPOSITION = {
-    "은": "는",
-    "이": "가",
-    "과": "와",
-    "이나": "나",
-    "을": "를",
-    "으로": "로",
+    '은': '는',
+    '이': '가',
+    '과': '와',
+    '이나': '나',
+    '을': '를',
+    '으로': '로',
 };
 
 /**
@@ -188,10 +188,10 @@ export const check = (text, type = null) => {
         return false;
     }
 
-    const target = String(text).replace(REG_INVALID_CHAR, " ").replace(REG_TARGET_CHAR, "$1");
+    const target = String(text).replace(REG_INVALID_CHAR, ' ').replace(REG_TARGET_CHAR, '$1');
     const code = target.charAt(target.length - 1).charCodeAt();
     const isKorean = KO_START_CODE <= code && code <= KO_FINISH_CODE;
-    const isRo = type === "로" || type === "으로";
+    const isRo = type === '로' || type === '으로';
 
     return isKorean ? checkCode(code, isRo) : checkText(target, isRo);
 };
@@ -207,8 +207,8 @@ export const check = (text, type = null) => {
  * @returns {string}
  */
 export const pick = (text, type, special = null) => {
-    if (typeof special !== "string") {
-        type = DEFAULT_POSTPOSITION[type] || type || "";
+    if (typeof special !== 'string') {
+        type = DEFAULT_POSTPOSITION[type] || type || '';
         special = SPECIAL_POSTPOSITION[type] || type;
     }
 
@@ -249,5 +249,9 @@ export const parse = (sentence) => (typeof sentence === 'string') ?
 
 
 export default {
-    check, pick, put, fix, parse
+    check,
+    pick,
+    put,
+    fix,
+    parse,
 }
