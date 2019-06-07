@@ -5,5 +5,10 @@
       "es6" : true
     },
     "sourceType": "module"
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "indent": [2, 4],
+    "comma-dangle": [2, "always"]
   }
 }

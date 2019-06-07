@@ -5,7 +5,8 @@
   "main": "src/postposition.js",
   "scripts": {
     "test": "node ./test/test.js",
-    "build": "npx webpack && npm run test"
+    "pre-build": "eslint --fix src/postposition.js",
+    "build": "npm run pre-build && webpack && npm run test"
   },
   "keywords": [
     "postposition",
