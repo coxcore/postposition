@@ -1,0 +1,10 @@
+dist/
+umd/
+demo/
+test/
+build/
+
+node_modules/
+*.min.js
+/*.js
+*.ts

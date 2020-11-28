@@ -155,7 +155,7 @@ const checkCode = (code, isRo) => {
  * 문자열로 사용 가능한지 여부 체크
  *
  * @private
- * @param text {string}
+ * @param text {any}
  * @returns {boolean}
  */
 const invalidText = text => {
@@ -231,18 +231,18 @@ export const put = (text, type, special = null) => `${text}${pick(text, type, sp
  * 같은 조사에 대한 처리가 반복되는 경우 특정 조사를 처리하는 함수를 생성하여 처리할 글자만 전달하여 사용한다.
  *
  * @param type {string} 조사
- * @param special {string} 종성이 없을 때 조사
+ * @param special {string|null} 종성이 없을 때 조사
  * @return {function}
  */
 export const fix = (type, special) => (text => put(text, type, special));
 
 /**
  * 문자열에서 특정 패턴을 찾아 해당 문자에 맞는 조사를 처리
- * 찾는 패턴 : 단어[ 종성이 없을 때 조사 | 종성이 있을 때 조사 ]
- * ex) 문자열[를|을] 변경 => 문자열을 변경
+ * 찾는 패턴 : '단어[ 기본 지원 조사 * ]' 혹은 '단어[ 종성이 없을 때 조사 | 종성이 있을 때 조사 ]'
+ * ex) '문자열[를*] 변경', '문자열[를|을] 변경' => 문자열을 변경
  *
- * @param sentence 처리할 문자열
- * @returns {string|*}
+ * @param sentence {string} 처리할 문자열
+ * @returns {string}
  */
 export const parse = (sentence) => (typeof sentence === 'string') ?
     sentence.replace(REG_PARSER_PATTERN, callbackParser) : sentence;
