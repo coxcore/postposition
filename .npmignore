@@ -1,9 +1,12 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+
 demo/
 test/
-.idea/
-.babelrc
-.editorconfig
-.eslintrc
-.git*
+src/
+build/
+.*
 package-lock.json
 webpack.config.js
+*build*.js

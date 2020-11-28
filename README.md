@@ -48,7 +48,8 @@ console.log(sentence2); // 바다로 이동하면 잠수함을 얻습니다.
 #### UMD - ES6 Module을 지원하지 않는 환경
 
 ```js
-const postposition = require('cox-postposition/dist/cox.postposition.min.js');
+//const postposition = require('cox-postposition/dist/cox.postposition.min.js');
+const postposition = require('cox-postposition/umd');
 
 const kor = postposition.put('고양이', '을');
 const eng = postposition.put('cat', '을');

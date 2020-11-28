@@ -164,3 +164,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# cox-postposition
+index.js
+/umd
+/dist
