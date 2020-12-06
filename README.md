@@ -3,7 +3,7 @@
 
 ## 예제
 
-[예제 보기](https://coxcore.github.io/postposition/1.4.1/demo/index.html)
+[예제 보기](https://coxcore.github.io/postposition/1.4.0/demo/index.html)
 
 ## 설치하기
 
