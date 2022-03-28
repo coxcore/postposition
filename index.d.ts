@@ -1,17 +1,21 @@
-export function check(text:string, type?:string):boolean;
-export function pick(text:string, type:string, special?:string):string;
-export function put(text:string, type:string, special?:string):string;
-export function fix(type:string, special?:string):Function;
-export function parse(text:string):string;
+type check = (text: string, type?: string) => boolean;
+type pick = (text: string, type: string, special?: string) => string;
+type put = (text: string, type: string, special?: string) => string;
+type fix = (type: string, special?: string) => (text: string) => string;
+type parse = (text: string) => string;
 
-export interface postposition {
-  check: Function;
-  pick: Function;
-  put: Function;
-  fix: Function;
-  parse: Function;
-}
+declare const postposition: {
+  check: check;
+  pick: pick;
+  put: put;
+  fix: fix;
+  parse: parse;
+};
 
-declare const postposition: postposition;
+export const check: check;
+export const pick: pick;
+export const put: put;
+export const fix: fix;
+export const parse: parse;
 
 export default postposition;
