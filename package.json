@@ -44,9 +44,9 @@
     "@babel/runtime": "^7.4.5",
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
-    "eslint-loader": "^2.1.2",
+    "eslint-loader": "^4.0.2",
     "webpack": "^5.55.1",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^5.0.1"
   },
   "typings": "./index.d.ts"
 }
