@@ -46,7 +46,7 @@
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "webpack": "^5.55.1",
-    "webpack-cli": "^3.3.2"
+    "webpack-cli": "^5.1.4"
   },
   "typings": "./index.d.ts"
 }
