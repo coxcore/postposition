@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -11,21 +12,24 @@ module.exports = {
         library: ['cox', 'postposition'],
         libraryTarget: 'umd',
         globalObject: '(typeof self !== \'undefined\' ? self : this)',
-    },
+     },
 
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-            },
-            {
+             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-            },
-        ],
-    },
+             },
+         ],
+     },
+
+    plugins: [
+         new ESLintPlugin({
+             extensions: ['js'],
+             context: './src',
+             emitError: true,
+             emitWarning: true,
+         }),
+     ],
 };
